@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+  "name": "MPartTranslator",
+  "version": "0.1",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_title": "MPartTranslator",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["js/content.js"]
+  }],
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "js/api.js",
+      "js/background.js"
+    ]
+  }
+}
