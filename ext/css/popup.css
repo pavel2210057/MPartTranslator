@@ -5,6 +5,7 @@
 
     /*color*/
     --col-accent: #2fafaf;
+    --col-adv: #a9a9a9;
 
     --def-transition: 200ms;
 }
@@ -13,6 +14,23 @@ body {
     margin: 0;
     width: var(--pw-width);
     height: var(--pw-height);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-button {
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 30px;
+    background-color: var(--col-adv);
+}
+
+::-webkit-resizer {
+    display: none;
 }
 
 #page {
@@ -70,18 +88,24 @@ body {
 
 .base-textarea {
     display: inline-block;
-    position: relative;
-    top: 10px;
-    width: 40%;
-    height: 200px;
-    max-width: 400px;
+    min-width: 183px;
+    min-height: 200px;
+    max-width: 183px;
     max-height: 200px;
+}
+
+div.base-textarea {
+    padding: 2px;
+    font-family: monospace;
+    font-size: 1rem;
+    text-align: left;
     overflow-y: scroll;
     overflow-wrap: break-word;
+    border: 1px solid var(--col-adv);
 }
 
 .base-select {
-    margin-top: 30px;
+    margin-top: 20px;
     width: 120px;
     height: 30px;
 }
@@ -159,10 +183,6 @@ body {
     width: 100%;;
 }
 
-.control-panel_item {
-
-}
-
 .control-panel_item.inactive {
     display: none;
 }
@@ -170,8 +190,4 @@ body {
 #translate-panel {
     display: grid;
     grid-template-rows: 1fr 3fr 1fr;
-}
-
-#send-translate {
-    top: 15px;
 }

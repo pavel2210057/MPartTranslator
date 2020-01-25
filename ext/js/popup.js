@@ -34,17 +34,6 @@
             .attr("selected", "true");
     };
 
-    const init_control_panel = () => {
-        build_control_languages();
-        document.dispatchEvent(
-            new CustomEvent("ControlPanelLoaded", {
-                detail: {
-                    panel: $(opts.control_panel)
-                }
-            })
-        );
-    };
-
     const bind_actions = () => {
         /*login.tmpl*/
         /*onclick #send-api-key*/
@@ -52,13 +41,10 @@
                 mpt_api_bg.auth($(opts.login_form.api_key_input).val())
                     .done(res => {
                         if ($.parseJSON(res).code === "1")
-                            build_page("control").done(
-                                init_control_panel
-                            );
+                            build_page("control");
                     });
             }
         );
-
         /*control.tmpl*/
         /*onclick category item*/
         $(document).on(
@@ -109,10 +95,18 @@
                 /**@method getBackgroundPage*/
                 if(!mpt_api_bg.get_user_status())
                     build_page("login");
-                else {
+                else
                     build_page("control")
-                        .done(init_control_panel);
-                }
+                        .done(() => {
+                            build_control_languages();
+                            document.dispatchEvent(
+                                new CustomEvent("ControlPanelLoaded", {
+                                    detail: {
+                                        panel: $(opts.control_panel)
+                                    }
+                                })
+                            );
+                        });
             }
         );
         bind_actions();

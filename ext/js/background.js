@@ -6,14 +6,13 @@
 chrome.runtime.onInstalled.addListener(() => {
     /*init api*/
     mpt_api.init();
-
     /**
      *  @var mpt_api
      *  @property contextMenus
      *  @property onClicked
      *  @method create
      */
-    /*Translate*/
+    /*translate*/
     chrome.contextMenus.create({
         title: "Translate",
         contexts: ["page", "selection"],
@@ -25,13 +24,13 @@ chrome.runtime.onInstalled.addListener(() => {
             chrome.tabs.getSelected(tab => {
                 /** @method sendMessage */
                 chrome.tabs.sendMessage(tab.id, {}, res => {
-                    const win = window.open(
+                    window.open(
                         "popup.html",
-                        "",
-                        "width=500,height=500"
+                        null,
+                        "width=540,height=540"
                     ).onload = function() {
                         this.document.addEventListener("ControlPanelLoaded", e => {
-                            const[
+                            const [
                                 translate_from,
                                 send_btn
                             ] = e.detail.panel
@@ -45,7 +44,7 @@ chrome.runtime.onInstalled.addListener(() => {
             });
         }
     });
-    /*Lang definition*/
+    /*lang definition*/
     chrome.contextMenus.create({
         title: "Define Language",
         contexts: ["page", "selection"]
